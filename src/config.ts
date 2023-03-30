@@ -13,6 +13,8 @@ export const databaseConfig = {
 export const nodemailer = {
     host: 'smtp.mailtrap.io',
     port: 2525,
-    username: 'a8f28f4e97ed86',
-    password: '3b9102c68f89a4'
+    username: 'dc19a696961c5f',
+    password: '6c682a69ea0215'
+    // username: 'a8f28f4e97ed86',
+    // password: '3b9102c68f89a4'
 }
