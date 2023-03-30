@@ -8,7 +8,7 @@ export class loginData {
     email: string;
 
     @IsNotEmpty()
-    @ApiProperty({ required: true, example: '*******', description: 'User password' })
+    @ApiProperty({ required: true, example: '11111111', description: 'User password' })
     password: string;
 }
 
@@ -24,7 +24,7 @@ export class CreateEmployeeRequestDto {
     phone_number: string;
 
     @IsNotEmpty()
-    @ApiProperty({ required: true, example: 'Sam', description: 'Employee name' })
+    @ApiProperty({ required: true, example: 'Sam Dave', description: 'Employee name' })
     name: string;
 
     @IsNotEmpty()
