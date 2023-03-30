@@ -53,13 +53,15 @@ export class AuthService {
                 employee_id: null,
                 job_title: null,
                 user_type: userType.key,
+                identity: null
             };
 
             var userDetail;
             if (userType.key == UserTypeEnum.EMPLOYEE) {
                 userDetail = await EmployeeEntity.findOne({ where: {userAuthId: user.id}})
                 payload.employee_id = userDetail?.id;
-                payload.job_title = userDetail?.job_title
+                payload.job_title = userDetail?.job_title;
+                payload.identity = userDetail.identity
             } else if (userType.key == UserTypeEnum.ADMIN) {
                 userDetail = await AdminEntity.findOne({ where: {userAuthId: user.id}})
             } else {
@@ -117,7 +119,8 @@ export class AuthService {
                     .values([{
                         name: payload.name,
                         jobTitle: payload.job_title,
-                        userAuthId: user.raw.insertId
+                        userAuthId: user.raw.insertId,
+                        identity: Helpers.generateRandomCode()
                     }])
                     .execute();
 

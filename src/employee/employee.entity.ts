@@ -21,6 +21,9 @@ export class EmployeeEntity extends BaseEntity {
     @Column({ type: 'tinyint', name: 'active' })
     active: number;
 
+    @Column({ type: 'varchar', name: 'identity' })
+    identity: string;
+
     @Column({ type: 'varchar', name: 'job_title' })
     jobTitle: string;
 

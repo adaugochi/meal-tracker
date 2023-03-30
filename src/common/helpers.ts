@@ -27,7 +27,7 @@ export class Helpers {
         return password;
     }
 
-    static generateRandomCode(passwordLength = 6) {
+    static generateRandomCode(passwordLength = 8) {
         let chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         let password = "";
         for (let i = 0; i <= passwordLength; i++) {
