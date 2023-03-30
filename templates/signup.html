@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            width: 98%;
+            font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 24px;
+            color: #212529;
+            text-align: left;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+<div style="width: 100%; margin-right: auto; margin-left: auto;">
+    <table style="width: 100%">
+        <tr>
+            <td>
+                <strong>Hello <%= name %>,</strong>
+                <br />
+                <br />
+                You now have access to the Yellow Box Employee Portal
+                <br />
+                ------
+                <br />
+                <p>Sign-in URL: <%= signupURL %></p>
+
+                <p>User name: <%= email %></p>
+                Your one time password will be provided separately by your system administrator.
+                <p>Password: <%= password %></p>
+
+                ------
+                <br/>
+                <br/>
+                <p>
+                    Sincerely,
+                    <br/>
+                    Your Yellow Box Account Administrator
+                </p>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+
+</html>
