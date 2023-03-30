@@ -22,12 +22,12 @@ export class EmployeeController {
         private employeeService: EmployeeService
     ){}
 
-    @Get('generate-code')
-    @ApiBadRequestResponse({ type: ValidationError})
-    @ApiOperation({ description: 'API endpoint to generate meal ticket code' })
-    @ApiUnauthorizedResponse({ type: UnauthorizedError})
-    @ApiNotFoundResponse({ type: NotFoundError})
-    async generateCode(@User() user: UserDecorator) {
-        return await this.employeeService.generateCode(user)
-    }
+    // @Get('generate-code')
+    // @ApiBadRequestResponse({ type: ValidationError})
+    // @ApiOperation({ description: 'API endpoint to generate meal ticket code' })
+    // @ApiUnauthorizedResponse({ type: UnauthorizedError})
+    // @ApiNotFoundResponse({ type: NotFoundError})
+    // async generateCode(@User() user: UserDecorator) {
+    //     return await this.employeeService.generateCode(user)
+    // }
 }
