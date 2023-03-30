@@ -22,7 +22,8 @@ export const AppConstants = {
         INVALID_USER: 'Invalid user credentials',
         PERMISSION_DENIED: 'Permission denied',
         EATEN_ALEADY: 'You have eaten already for today',
-        CODE_EXIST: 'Check your dashboard for your code'
+        CODE_EXIST: 'Check your dashboard for your code',
+        INVALID_CODE: 'Your code is invalid or has expired'
     },
     SaltOrRounds: 10
 }

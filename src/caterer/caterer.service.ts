@@ -51,10 +51,9 @@ export class CatererService {
             if (em?.status) throw new Error(AppConstants.Messages.EATEN_ALEADY);
 
             let code =  Helpers.generateRandomCode(4).toUpperCase();
-            console.log(em)
 
             if (em) {
-                await EmployeeMealEntity.update(em.id, {code: code})
+                await EmployeeMealEntity.update(em.id, {code: code, expiresAt: Helpers.addSeconds()})
             } else {
                 await this.dataSource.createQueryBuilder()
                     .insert()
@@ -71,7 +70,7 @@ export class CatererService {
             let userCred = await UserEntity.findOne({ where: {id: employee.userAuthId}});
             await Nodemailer.send(code, 'Meal ticket code', userCred.email);
 
-            return { success: true, message: 'Success', data: {code: code}}
+            return { success: true, message: 'Success', data: {code: code, employee_id: employee.id}}
         } catch (e) {
             return { success: false, message: e.message }
         }
@@ -93,6 +92,9 @@ export class CatererService {
             if (!meal) {
                 throw new Error(AppConstants.Messages.EATEN_ALEADY);
             }
+
+            if (Helpers.isSameOrAfter(meal.expiresAt)) throw new Error(AppConstants.Messages.INVALID_CODE);
+
             await EmployeeMealEntity.update(
                 {
                     status: UserStatusEnum.NO,

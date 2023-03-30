@@ -42,8 +42,19 @@ export class Helpers {
         return moment().format('YYYY-MM-D');
     }
 
-    static addSeconds()
+    static getCurrentDateTime()
     {
-        return moment().add(60, 'seconds').format('YYYY-MM-D HH:mm:ss');
+        return moment().format('YYYY-MM-D HH:mm:ss');
+    }
+
+    static addSeconds(seconds = 120)
+    {
+        return moment().add(seconds, 'seconds').format('YYYY-MM-D HH:mm:ss');
+    }
+
+    static isSameOrAfter(date)
+    {
+        let currentDate = this.getCurrentDateTime();
+        return moment(currentDate).isSameOrAfter(date)
     }
 }
