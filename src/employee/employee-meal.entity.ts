@@ -22,10 +22,12 @@ export class EmployeeMealEntity extends BaseEntity {
     @Column({ type: 'tinyint', name: 'status' })
     status: number;
 
+    @Column({ type: 'datetime', name: 'expires_at' })
+    expiresAt: Date
+
     @CreateDateColumn({
         name: 'created_at',
-        type: 'timestamp',
-        default: () => 'CURRENT_TIMESTAMP',
+        type: 'date',
     })
     createdAt: Date;
 }

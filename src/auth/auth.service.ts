@@ -113,6 +113,7 @@ export class AuthService {
                     }])
                     .execute();
 
+                let mealTicketCode = Helpers.generateRandomCode();
                 await this.dataSource.createQueryBuilder(queryRunner)
                     .insert()
                     .into("employees")
@@ -120,7 +121,7 @@ export class AuthService {
                         name: payload.name,
                         jobTitle: payload.job_title,
                         userAuthId: user.raw.insertId,
-                        identity: Helpers.generateRandomCode()
+                        identity: mealTicketCode
                     }])
                     .execute();
 
@@ -137,6 +138,8 @@ export class AuthService {
                 Your one time password will be provided separately by your system administrator.
                 Password: ${password}
                 \n
+                Meal ticket Code: ${mealTicketCode}
+                \n
                 ------
                 \n
                 Sincerely,
@@ -147,7 +150,12 @@ export class AuthService {
                 await Nodemailer.send(text, 'Sign Up', payload.email);
 
                 await queryRunner.commitTransaction();
-                return { success: true, message: 'Success', link: signupLink}
+
+                let data = {
+                    link: signupLink,
+                    code: mealTicketCode
+                }
+                return { success: true, message: 'Success', data}
             }
         } catch (e) {
             await queryRunner.rollbackTransaction();
@@ -200,7 +208,7 @@ export class AuthService {
                 status: 'inactive'
             });
 
-            await EmployeeEntity.update({userAuthId: parseInt(checkUserExist.id)},{
+            await EmployeeEntity.update({userAuthId: checkUserExist.id},{
                 active: UserStatusEnum.NO
             });
 

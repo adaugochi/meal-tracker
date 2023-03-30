@@ -41,4 +41,9 @@ export class Helpers {
     {
         return moment().format('YYYY-MM-D');
     }
+
+    static addSeconds()
+    {
+        return moment().add(60, 'seconds').format('YYYY-MM-D HH:mm:ss');
+    }
 }

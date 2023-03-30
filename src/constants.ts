@@ -10,7 +10,10 @@ export const AppConstants = {
         GET_EMPLOYEES_FOR_MEAL: `SELECT e.name AS name, em.status AS status, e.job_title AS job_title, em.created_at AS created_at
             FROM employee_meals em
             LEFT JOIN employees e ON em.employee_id = e.id
-            WHERE em.created_at = ? AND e.active = '1'`
+            WHERE em.created_at = ? AND e.active = '1'`,
+        GET_EMPLOYEE: `SELECT * FROM employee_meal em 
+            LEFT JOIN employees e ON em.employee_id = e.id
+            WHERE em.created_at = ? AND e.active = '1' AND e.identity = ?`
     },
     Messages: {
         USER_CREATED_SUCCESSFULLY: 'User created successfully',

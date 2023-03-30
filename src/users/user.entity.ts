@@ -13,7 +13,7 @@ import {UserTypeEntity} from "./user-type.entity";
 @Entity({ name: 'user_credentials' })
 export class UserEntity extends BaseEntity {
     @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
-    id: string;
+    id: number;
 
     @Column({ type: 'varchar', name: 'email', unique: true })
     email: string;

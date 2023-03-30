@@ -1,12 +1,14 @@
 import {Injectable} from "@nestjs/common";
 import {UserDecorator} from "../users/user.decorator";
-import {CatererRequestDto} from "./dto/caterer-request.dto";
+import {CatererRequestDto, GenerateCodeRequestDto} from "./dto/caterer-request.dto";
 import {DataSource} from "typeorm";
 import {UserTypeEnum} from "../users/user-type.entity";
 import {AppConstants} from "../constants";
-import {UserStatusEnum} from "../users/user.entity";
+import {UserEntity, UserStatusEnum} from "../users/user.entity";
 import {EmployeeMealEntity} from "../employee/employee-meal.entity";
 import {Helpers} from "../common/helpers";
+import {EmployeeEntity} from "../employee/employee.entity";
+import {Nodemailer} from "../common/nodemailer";
 const mysql = require('mysql');
 
 @Injectable()
@@ -23,6 +25,53 @@ export class CatererService {
             let result = await this.dataSource.query(sql);
 
             return { success: true, message: 'Success', data: result}
+        } catch (e) {
+            return { success: false, message: e.message }
+        }
+    }
+
+    public async generateCode(user: UserDecorator, payload: GenerateCodeRequestDto)
+    {
+        try {
+            if (user.user_type != UserTypeEnum.CATERER) {
+                throw new Error(AppConstants.Messages.PERMISSION_DENIED);
+            }
+
+            let employee = await EmployeeEntity.findOne({ where: {identity: payload.employee_identity, active: UserStatusEnum.YES}});
+            if (!employee) throw new Error(AppConstants.Messages.INVALID_USER);
+
+            let em = await EmployeeMealEntity.createQueryBuilder('em')
+                .where(
+                    "em.created_at = :currentDate AND employee_id = :employeeId",
+                    {currentDate: Helpers.getCurrentDate().toString(), employeeId: employee.id}
+                )
+                .getOne();
+
+
+            if (em?.status) throw new Error(AppConstants.Messages.EATEN_ALEADY);
+
+            let code =  Helpers.generateRandomCode(4).toUpperCase();
+            console.log(em)
+
+            if (em) {
+                await EmployeeMealEntity.update(em.id, {code: code})
+            } else {
+                await this.dataSource.createQueryBuilder()
+                    .insert()
+                    .into("employee_meals")
+                    .values([{
+                        employeeId: employee.id,
+                        code: code,
+                        expiresAt: Helpers.addSeconds(),
+                        createdAt: Helpers.getCurrentDate()
+                    }])
+                    .execute();
+            }
+
+            let userCred = await UserEntity.findOne({ where: {id: employee.userAuthId}});
+            await Nodemailer.send(code, 'Meal ticket code', userCred.email);
+
+            return { success: true, message: 'Success', data: {code: code}}
         } catch (e) {
             return { success: false, message: e.message }
         }

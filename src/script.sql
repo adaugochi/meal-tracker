@@ -39,9 +39,11 @@ CREATE TABLE `employees` (
     `name` varchar(255) NOT NULL,
     `job_title` varchar(255) NULL,
     `phone_number` varchar(255) NULL,
+    `identity` varchar(10), NOT NULL,
     `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
+    UNIQUE KEY `iq_identity` (`identity`),
     KEY `idx_name` (`name`),
     KEY `idx_user_auth_id` (`user_auth_id`)
 );
@@ -63,7 +65,8 @@ CREATE TABLE `employee_meals` (
     `employee_id` int unsigned NOT NULL,
     `code` varchar(10) NOT NULL,
     `status` tinyint(1) DEFAULT '0',
-    `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `expires_at` DATETIME NULL,
+    `created_at` date NOT NULL,
     PRIMARY KEY (`id`),
     KEY `idx_code` (`code`),
     KEY `idx_employee_id` (`employee_id`)
