@@ -32,6 +32,11 @@
 ## Postman API DOc
 [API DOC](https://documenter.getpostman.com/view/6370155/2s93RTPrk8)
 
+## Requirements
+- node
+- npm
+- MySQL
+
 ## Config
 Make a copy of `config.sample.ts` to `config.ts` in the `config` directory
 ```bash
@@ -69,6 +74,10 @@ $ npm run test
 # e2e tests
 $ npm run test:e2e
 ```
+
+## Hosting Platform
+- [Render](https://render.com/) - for the NodeJs App
+- [db4free](https://www.db4free.net/) - for the MySQL database
 
 ## Support
 
