@@ -3,11 +3,11 @@ import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 export interface UserDecorator {
     id: number;
     employee_id: number;
-    active: number,
+    identity: string | null;
     email: string;
     name: string;
     user_type: string;
-    phone_number: string;
+    phone_number: string | null;
     job_title: string | null;
 }
 
