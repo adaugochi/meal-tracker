@@ -26,6 +26,12 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Swagger API Doc
+[API DOC](https://meal-tracker.onrender.com/api-mss)
+
+## Postman API DOc
+[API DOC](https://documenter.getpostman.com/view/6370155/2s93RTPrk8)
+
 ## Config
 Make a copy of `config.sample.ts` to `config.ts` in the `config` directory
 ```bash
@@ -34,7 +40,6 @@ $ cd config
 
 $ cp config.sample.ts config.ts
 ```
-
 
 ## Installation
 
@@ -63,9 +68,6 @@ $ npm run test
 
 # e2e tests
 $ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
 ## Support
@@ -74,7 +76,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## Stay in touch
 
-- Author - Adaa Mgbede
+- Author - Adaa Mgbede (adaamgbede@gmail.com)
 
 ## License
 

@@ -1,9 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreatedResponseDto {
-    @ApiProperty({ example: 201 })
-    statusCode: number;
+    @ApiProperty({ example: true })
+    success: boolean;
 
-    @ApiProperty({ example: "Message created successfully"})
+    @ApiProperty({ example: "Success"})
     message: string;
+
+    @ApiProperty()
+    data: any
 }
