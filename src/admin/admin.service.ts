@@ -4,6 +4,7 @@ import {UserTypeEnum} from "../users/user-type.entity";
 import {AppConstants} from "../constants";
 import {UserDecorator} from "../users/user.decorator";
 import {Helpers} from "../common/helpers";
+import {CustomError} from "../common/custom.error";
 const mysql = require('mysql');
 
 @Injectable()
@@ -24,7 +25,7 @@ export class AdminService {
 
             return { success: true, message: 'Success', data: result}
         } catch (e) {
-            return { success: false, message: e.message }
+            throw new CustomError(e.message)
         }
     }
 
@@ -49,7 +50,7 @@ export class AdminService {
 
             return { success: true, message: 'Success', data: result}
         } catch (e) {
-            return { success: false, message: e.message }
+            throw new CustomError(e.message)
         }
     }
 

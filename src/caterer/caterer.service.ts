@@ -3,12 +3,13 @@ import {UserDecorator} from "../users/user.decorator";
 import {CatererRequestDto, GenerateCodeRequestDto} from "./dto/caterer-request.dto";
 import {DataSource} from "typeorm";
 import {UserTypeEnum} from "../users/user-type.entity";
-import {AppConstants} from "../constants";
+import {AppConstants, ResponseCodes} from "../constants";
 import {UserEntity, UserStatusEnum} from "../users/user.entity";
 import {EmployeeMealEntity} from "../employee/employee-meal.entity";
 import {Helpers} from "../common/helpers";
 import {EmployeeEntity} from "../employee/employee.entity";
 import {Nodemailer} from "../common/nodemailer";
+import {CustomError} from "../common/custom.error";
 const mysql = require('mysql');
 
 @Injectable()
@@ -72,7 +73,7 @@ export class CatererService {
 
             return { success: true, message: 'Success', data: {code: code, employee_id: employee.id}}
         } catch (e) {
-            return { success: false, message: e.message }
+            throw new CustomError(e.message)
         }
     }
 
@@ -107,7 +108,7 @@ export class CatererService {
 
             return { success: true, message: 'Success'}
         } catch (e) {
-            return { success: false, message: e.message }
+            throw new CustomError(e.message)
         }
     }
 

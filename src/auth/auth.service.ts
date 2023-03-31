@@ -17,6 +17,7 @@ import {EmployeeEntity} from "../employee/employee.entity";
 import {AdminEntity} from "../admin/admin.entity";
 import {CatererEntity} from "../caterer/caterer.entity";
 import {User, UserDecorator} from "../users/user.decorator";
+import {CustomError} from "../common/custom.error";
 const md5 = require('md5');
 
 @Injectable()
@@ -77,10 +78,7 @@ export class AuthService {
                 user: payload,
             };
         } else {
-            return {
-                success: false,
-                message: AppConstants.Messages.INVALID_USER,
-            };
+            throw new CustomError(AppConstants.Messages.INVALID_USER)
         }
     }
 
@@ -159,7 +157,7 @@ export class AuthService {
             }
         } catch (e) {
             await queryRunner.rollbackTransaction();
-            return { success: false, message: e.message }
+            throw new CustomError(e.message)
         } finally {
             await queryRunner.release();
         }
@@ -188,7 +186,7 @@ export class AuthService {
 
             return { success: true, message: 'Success'}
         } catch (e) {
-            return { success: false, message: e.message }
+            throw new CustomError(e.message)
         }
     }
 
@@ -214,7 +212,7 @@ export class AuthService {
 
             return { success: true, message: 'Success'}
         } catch (e) {
-            return { success: false, message: e.message }
+            throw new CustomError(e.message)
         }
     }
 
@@ -240,7 +238,7 @@ export class AuthService {
                 throw new Error(AppConstants.Messages.INVALID_USER)
             }
         } catch (e) {
-            return { success: false, message: e.message }
+            throw new CustomError(e.message)
         }
     }
 }
