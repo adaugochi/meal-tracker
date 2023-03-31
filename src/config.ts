@@ -2,6 +2,8 @@ export const jwtConstants = {
     secret: 'yellowbox',
 };
 
+export const webAppURL = 'https://meal-tracker-two.vercel.app/'
+
 export const databaseConfig = {
     host: 'db4free.net',
     port: 3306,

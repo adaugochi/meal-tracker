@@ -18,6 +18,7 @@ import {AdminEntity} from "../admin/admin.entity";
 import {CatererEntity} from "../caterer/caterer.entity";
 import {User, UserDecorator} from "../users/user.decorator";
 import {CustomError} from "../common/custom.error";
+import {webAppURL} from "../config";
 const md5 = require('md5');
 
 @Injectable()
@@ -123,7 +124,7 @@ export class AuthService {
                     }])
                     .execute();
 
-                let signupLink = `https://localhost:3000/employee/set-password?identity=${payload.email}`;
+                let signupLink = `${webAppURL}/set-password?identity=${payload.email}`;
                 let text = `
                 Hello ${payload.name} 
                 \n
