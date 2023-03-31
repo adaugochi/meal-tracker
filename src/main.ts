@@ -8,6 +8,7 @@ import {ValidationPipe} from "@nestjs/common";
 import {EmployeeModule} from "./employee/employee.module";
 import {AdminModule} from "./admin/admin.module";
 import {CatererModule} from "./caterer/caterer.module";
+import {RolesGuard} from "./auth/roles.guard";
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);

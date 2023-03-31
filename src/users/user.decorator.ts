@@ -11,8 +11,7 @@ export interface UserDecorator {
     job_title: string | null;
 }
 
-export const User = createParamDecorator(
-    (data: unknown, ctx: ExecutionContext) => {
+export const User = createParamDecorator((data: unknown, ctx: ExecutionContext) => {
         const request = ctx.switchToHttp().getRequest();
 
         return request.user as UserDecorator;

@@ -3,7 +3,7 @@ import {UserDecorator} from "../users/user.decorator";
 import {CatererRequestDto, GenerateCodeRequestDto} from "./dto/caterer-request.dto";
 import {DataSource} from "typeorm";
 import {UserTypeEnum} from "../users/user-type.entity";
-import {AppConstants, ResponseCodes} from "../constants";
+import {AppConstants} from "../constants";
 import {UserEntity, UserStatusEnum} from "../users/user.entity";
 import {EmployeeMealEntity} from "../employee/employee-meal.entity";
 import {Helpers} from "../common/helpers";
