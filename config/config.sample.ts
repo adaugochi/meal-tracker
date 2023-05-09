@@ -8,11 +8,9 @@ export const databaseConfig={
     password: '',
     database: 'quickbus_com',
 }
-export const apiUrls={
-    baseUrl:'https://dev.api.quickbus.com/v1',
-    cashUrl:'https://dev.cashadvance.quickbus.com/api/v1',
-    key: 'bus-operators',
-    secret:'****',
-    cash_key:'bo-app',
-    cash_secret:'****'
-};
+export const nodemailer = {
+    host: 'smtp.mailtrap.io',
+    port: 2525,
+    username: '',
+    password: ''
+}
